@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.keras import applications
 
 
-# CUSTOMIZE PATH
+# CUSTOMIZE PATH in questo caso la rete già è addestrata 
 root_dir_path = "C:/Users/Gren/Desktop/fire_detector/train"
 
 
