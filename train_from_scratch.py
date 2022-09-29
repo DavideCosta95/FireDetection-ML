@@ -1,4 +1,5 @@
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 # CUSTOMIZE PATH
 root_dir_path = "C:/Users/Gren/Desktop/fire_detector/train"
@@ -84,11 +85,31 @@ def train_data():
         metrics=["accuracy"],
     )
 
-    model.fit(
+    network_history = model.fit(
         train_ds, epochs=epochs, callbacks=callbacks, validation_data=val_ds, shuffle=True,
     )
 
+    plot_history(network_history)
+
     return model
+
+
+def plot_history(network_history):
+    x_plot = list(range(1, epochs + 1))
+    plt.figure()
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.plot(x_plot, network_history.history['loss'])
+    plt.plot(x_plot, network_history.history['val_loss'])
+    plt.legend(['Training', 'Validation'])
+
+    plt.figure()
+    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy')
+    plt.plot(x_plot, network_history.history['accuracy'])
+    plt.plot(x_plot, network_history.history['val_accuracy'])
+    plt.legend(['Training', 'Validation'], loc='lower right')
+    plt.show()
 
 
 model = train_data()
